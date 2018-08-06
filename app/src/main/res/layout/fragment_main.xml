@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads">
+    <!--xmlns:ads="http://schemas.android.com/apk/res-auto"-->
+
+
+
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_above="@+id/adView"
     android:background="@drawable/shifatullah_background"
 
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.github.ppartisan.simplealarms.view.EmptyRecyclerView
+    <com.binary.geek.shitatullahPaglaAlarm.view.EmptyRecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -37,3 +47,23 @@
         app:fabSize="auto"/>
 
 </android.support.design.widget.CoordinatorLayout>
+
+    <com.google.android.gms.ads.AdView
+
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+
+        >
+
+        <!-- getting error "The ad unit ID can only be set once on AdView." if i add it in xml-->
+        <!--ads:adSize="SMART_BANNER"-->
+        <!--ads:adUnitId="@string/banner_home_footer"-->
+
+    </com.google.android.gms.ads.AdView>
+
+</RelativeLayout>

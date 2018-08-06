@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "363094315985",
+    "firebase_url": "https://shifatullah-pagla-alarm.firebaseio.com",
+    "project_id": "shifatullah-pagla-alarm",
+    "storage_bucket": "shifatullah-pagla-alarm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363094315985:android:e3e5707c6ffebb62",
+        "android_client_info": {
+          "package_name": "com.binary.geek.shitatullahPaglaAlarm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "363094315985-2k2hkp6ngjmlpc9q7d8p59baoeeshfdh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMi_aAkly3EXwiFdp8_6aAk35ZIn-XZVc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
