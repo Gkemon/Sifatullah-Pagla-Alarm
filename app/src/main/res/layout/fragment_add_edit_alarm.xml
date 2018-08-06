@@ -23,7 +23,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_marginBottom="@dimen/list_padding_vertical_small"
             android:text="@string/time"
-            tools:text="Time"/>
+            tools:text="@string/time"/>
 
         <View
             android:layout_width="match_parent"
@@ -46,7 +46,9 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_marginBottom="@dimen/list_padding_vertical_small"
             android:text="@string/label"
-            tools:text="Label"/>
+            android:textSize="14sp"
+            tools:textSize="14sp"
+            tools:text="@string/label"/>
 
         <View
             android:layout_width="match_parent"
@@ -98,6 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/list_padding_vertical_small"
+                android:checked="true"
                 app:layout_gravity="center_vertical"/>
 
             <TextView
@@ -114,6 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/list_padding_vertical_small"
+                android:checked="true"
                 app:layout_gravity="center_vertical"/>
 
             <TextView
@@ -126,6 +130,7 @@
                 />
 
             <CheckBox
+                android:checked="true"
                 android:id="@+id/edit_alarm_wed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -142,6 +147,7 @@
                 />
 
             <CheckBox
+                android:checked="true"
                 android:id="@+id/edit_alarm_thurs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -158,6 +164,7 @@
                 />
 
             <CheckBox
+                android:checked="true"
                 android:id="@+id/edit_alarm_fri"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -174,6 +181,7 @@
                 />
 
             <CheckBox
+                android:checked="true"
                 android:id="@+id/edit_alarm_sat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -190,6 +198,7 @@
                 />
 
             <CheckBox
+                android:checked="true"
                 android:id="@+id/edit_alarm_sun"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -58,12 +58,25 @@ public final class AddEditAlarmFragment extends Fragment {
         mLabel.setText(alarm.getLabel());
 
         mMon = (CheckBox) v.findViewById(R.id.edit_alarm_mon);
+        mMon.setChecked(true);
+
         mTues = (CheckBox) v.findViewById(R.id.edit_alarm_tues);
+        mTues.setChecked(true);
+
         mWed = (CheckBox) v.findViewById(R.id.edit_alarm_wed);
+        mWed.setChecked(true);
+
         mThurs = (CheckBox) v.findViewById(R.id.edit_alarm_thurs);
+        mThurs.setChecked(true);
+
         mFri = (CheckBox) v.findViewById(R.id.edit_alarm_fri);
+        mFri.setChecked(true);
+
         mSat = (CheckBox) v.findViewById(R.id.edit_alarm_sat);
+        mSat.setChecked(true);
+
         mSun = (CheckBox) v.findViewById(R.id.edit_alarm_sun);
+        mSun.setChecked(true);
 
         setDayCheckboxes(alarm);
 
@@ -94,6 +107,7 @@ public final class AddEditAlarmFragment extends Fragment {
     }
 
     private void setDayCheckboxes(Alarm alarm) {
+
 
 
         mMon.setChecked(alarm.getDay(Alarm.MON));

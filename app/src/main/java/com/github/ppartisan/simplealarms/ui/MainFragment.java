@@ -55,12 +55,22 @@ public final class MainFragment extends Fragment
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+//                final Intent intentForOpenLandingPage = new Intent(getContext(), AlarmLandingPageActivity.class);
+//                intentForOpenLandingPage.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//
+//                getContext().startActivity(intentForOpenLandingPage);
+
+
                 AlarmUtils.checkAlarmPermissions(getActivity());
                 final Intent i =
                         AddEditAlarmActivity.buildAddEditAlarmActivityIntent(
                                 getContext(), AddEditAlarmActivity.ADD_ALARM
                         );
                 startActivity(i);
+
+
+
             }
         });
 

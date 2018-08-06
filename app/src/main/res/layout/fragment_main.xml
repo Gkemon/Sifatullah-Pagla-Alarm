@@ -3,12 +3,12 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/shifatullah_background"
+
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.github.ppartisan.simplealarms.view.EmptyRecyclerView
         android:id="@+id/recycler"
-        android:background="@drawable/shifatullah_background"
-
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -20,6 +20,7 @@
         android:gravity="center"
         android:textStyle="bold"
         android:textSize="20sp"
+        android:padding="10dp"
         android:textColor="@android:color/white"
         android:text="@string/empty_view_text"/>
 
@@ -28,6 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
+        app:backgroundTint="@color/primary"
         android:layout_marginEnd="@dimen/fab_margin_default"
         android:layout_marginRight="@dimen/fab_margin_default"
         android:layout_marginBottom="@dimen/fab_margin_default"

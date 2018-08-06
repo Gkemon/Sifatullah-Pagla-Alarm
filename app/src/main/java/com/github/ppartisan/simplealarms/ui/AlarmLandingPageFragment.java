@@ -1,6 +1,7 @@
 package com.github.ppartisan.simplealarms.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.VideoView;
 
 import com.github.ppartisan.simplealarms.R;
 
@@ -24,6 +26,13 @@ public final class AlarmLandingPageFragment extends Fragment implements View.OnC
 
         launchMainActivityBtn.setOnClickListener(this);
         dismiss.setOnClickListener(this);
+
+
+        VideoView view = (VideoView)v.findViewById(R.id.video_player);
+        String path = "android.resource://" +"com.github.ppartisan.simplealarms" + "/" + R.raw.videoplayback;
+        view.setVideoURI(Uri.parse(path));
+        view.start();
+
 
         return v;
     }

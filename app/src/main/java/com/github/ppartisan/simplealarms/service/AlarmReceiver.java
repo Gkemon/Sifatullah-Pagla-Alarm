@@ -40,7 +40,6 @@ public final class AlarmReceiver extends BroadcastReceiver {
 
         final Intent intentForOpenLandingPage = new Intent(context, AlarmLandingPageActivity.class);
         intentForOpenLandingPage.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
         context.startActivity(intentForOpenLandingPage);
 
 
@@ -52,7 +51,7 @@ public final class AlarmReceiver extends BroadcastReceiver {
         builder.setSmallIcon(R.drawable.ic_alarm_white_24dp);
         builder.setColor(ContextCompat.getColor(context, R.color.accent));
         builder.setContentTitle(context.getString(R.string.app_name));
-        builder.setContentText(alarm.getLabel());
+        builder.setContentText("অশিক্ষিত মূর্খ বর্বররা ঘুম থেকে উঠ জলদি");
         builder.setTicker(alarm.getLabel());
         builder.setVibrate(new long[] {1000,500,1000,500,1000,500});
         builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
@@ -63,7 +62,8 @@ public final class AlarmReceiver extends BroadcastReceiver {
         manager.notify(id, builder.build());
 
         //Reset Alarm manually
-        setReminderAlarm(context, alarm);
+        if(AlarmUtils.isAlarmActive(alarm))
+            setReminderAlarm(context, alarm);
 
     }
 
@@ -73,8 +73,24 @@ public final class AlarmReceiver extends BroadcastReceiver {
        // Check whether the alarm is set to run on any days
         if(!AlarmUtils.isAlarmActive(alarm)) {
             Log.d("GK","ACTIVE");
+
+            final Intent intent = new Intent(context, AlarmReceiver.class);
+            intent.putExtra(ALARM_EXTRA, alarm);
+
+
+            AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            PendingIntent pi = PendingIntent.getBroadcast(context,AlarmUtils.getNotificationId(alarm), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            Log.d("GK","A NORMAL ALARM CREATED");
+            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+                am.set(AlarmManager.RTC_WAKEUP, alarm.getTime(), pi);
+            } else {
+                am.setExact(AlarmManager.RTC_WAKEUP, alarm.getTime(), pi);
+            }
+
             //If alarm not set to run on any days, cancel any existing notifications for this alarm
-            cancelReminderAlarm(context, alarm);
+           // cancelReminderAlarm(context, alarm);
+
             return;
         }
         else {
@@ -86,6 +102,7 @@ public final class AlarmReceiver extends BroadcastReceiver {
 
         final Intent intent = new Intent(context, AlarmReceiver.class);
         intent.putExtra(ALARM_EXTRA, alarm);
+
         final PendingIntent pIntent = PendingIntent.getBroadcast(
                 context,
                 AlarmUtils.getNotificationId(alarm),
