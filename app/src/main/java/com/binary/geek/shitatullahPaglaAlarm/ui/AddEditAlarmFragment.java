@@ -44,6 +44,7 @@ public final class AddEditAlarmFragment extends Fragment {
     private CheckBox mMon, mTues, mWed, mThurs, mFri, mSat, mSun;
     private AdView mAdView;
     InterstitialAd mInterstitialAd;
+    boolean canIshowAd = false;
 
     public static AddEditAlarmFragment newInstance(Alarm alarm) {
 
@@ -53,6 +54,7 @@ public final class AddEditAlarmFragment extends Fragment {
         AddEditAlarmFragment fragment = new AddEditAlarmFragment();
         fragment.setArguments(args);
         return fragment;
+
     }
 
     @Nullable
@@ -94,7 +96,7 @@ public final class AddEditAlarmFragment extends Fragment {
 
         setDayCheckboxes(alarm);
 
-        setBannerAD(v);
+        checkAdActiveOrNot(v);
 
         return v;
     }
@@ -152,7 +154,9 @@ public final class AddEditAlarmFragment extends Fragment {
         time.set(Calendar.MINUTE, ViewUtils.getTimePickerMinute(mTimePicker));
         time.set(Calendar.HOUR_OF_DAY, ViewUtils.getTimePickerHour(mTimePicker));
 
-        Log.d("GK","Current min:"+ViewUtils.getTimePickerMinute(mTimePicker));
+        //TODO work from here
+
+        Log.d("GK","Current min:"+ViewUtils.getTimePickerMinute(mTimePicker)+" ");
 
 
         alarm.setTime(time.getTimeInMillis());
@@ -177,6 +181,7 @@ public final class AddEditAlarmFragment extends Fragment {
         AlarmReceiver.setReminderAlarm(getActivity(), alarm);
 
 
+        if(canIshowAd)
         setfullScreenAD();
        // getActivity().finish();
 
@@ -339,13 +344,25 @@ public final class AddEditAlarmFragment extends Fragment {
 
                     @Override
                     public void onAdClosed() {
-                        getActivity().finish();
+
+                        try {
+                            getActivity().finish();
+                        }
+                        catch (Exception e){
+
+                        }
+
 
                     }
 
                     @Override
                     public void onAdFailedToLoad(int errorCode) {
-                        getActivity().finish();
+                        try {
+                            getActivity().finish();
+                        }
+                        catch (Exception e){
+
+                        }
                         //  Toast.makeText(getActivity(), "Ad failed to load! error code: " + errorCode, Toast.LENGTH_SHORT).show();
                     }
 
@@ -374,5 +391,24 @@ public final class AddEditAlarmFragment extends Fragment {
             mInterstitialAd.show();
         }
     }
+
+    public void checkAdActiveOrNot(final View view){
+        FirebaseDatabase.getInstance().getReference().child("admob flag").child("show ad").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("GK","DataSnapshot : banner id : "+dataSnapshot.getValue(Boolean.class));
+
+                canIshowAd=dataSnapshot.getValue(Boolean.class);
+                if(dataSnapshot.getValue(Boolean.class))setBannerAD(view);
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+                canIshowAd=false;
+            }
+        });
+    }
+
 
 }

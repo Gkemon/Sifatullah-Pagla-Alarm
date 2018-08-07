@@ -46,6 +46,7 @@ public final class MainFragment extends Fragment
     private LoadAlarmsReceiver mReceiver;
     private AlarmsAdapter mAdapter;
     private AdView mAdView;
+    boolean canIshowAd=false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,8 +74,8 @@ public final class MainFragment extends Fragment
 
 
         setPublisherID();
-        setBannerAD(v);
 
+        checkAdActiveOrNot(v);
 
 
         final FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
@@ -228,6 +229,24 @@ public final class MainFragment extends Fragment
             public void onCancelled(DatabaseError databaseError) {
                 mAdView.setVisibility(View.GONE);
                 Log.d("GK","DataSnapshot : databaseError"+databaseError.getMessage());
+            }
+        });
+    }
+
+    public void checkAdActiveOrNot(final View view){
+        FirebaseDatabase.getInstance().getReference().child("admob flag").child("show ad").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("GK","DataSnapshot : banner id : "+dataSnapshot.getValue(Boolean.class));
+
+                canIshowAd=dataSnapshot.getValue(Boolean.class);
+                if(dataSnapshot.getValue(Boolean.class))setBannerAD(view);
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+                canIshowAd=false;
             }
         });
     }

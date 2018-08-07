@@ -30,6 +30,7 @@ public final class AddEditAlarmActivity extends AppCompatActivity {
     public static final int ADD_ALARM = 2;
     public static final int UNKNOWN = 0;
     public Alarm alarm;
+    public static Context context;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +41,8 @@ public final class AddEditAlarmActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getToolbarTitle());
 
+
+        context = this;
          alarm = getAlarm();
 
         if(getSupportFragmentManager().findFragmentById(R.id.edit_alarm_frag_container) == null) {

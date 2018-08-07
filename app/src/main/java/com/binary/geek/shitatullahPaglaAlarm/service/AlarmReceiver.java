@@ -18,6 +18,7 @@ import com.binary.geek.shitatullahPaglaAlarm.R;
 import com.binary.geek.shitatullahPaglaAlarm.model.Alarm;
 import com.binary.geek.shitatullahPaglaAlarm.ui.AlarmLandingPageActivity;
 import com.binary.geek.shitatullahPaglaAlarm.util.AlarmUtils;
+import com.binary.geek.shitatullahPaglaAlarm.util.ViewUtils;
 
 import java.util.Calendar;
 
@@ -74,14 +75,24 @@ public final class AlarmReceiver extends BroadcastReceiver {
         if(!AlarmUtils.isAlarmActive(alarm)) {
             Log.d("GK","ACTIVE");
 
+
+            final Calendar time = Calendar.getInstance();
+
+            time.set(Calendar.SECOND,(int)(alarm.getTime()/1000);
+
+            alarm.setTime(System.currentTimeMillis()+(System.currentTimeMillis()-alarm.getTime()));
+
+            Log.d("GK","Next time :"+System.currentTimeMillis()+(System.currentTimeMillis()-alarm.getTime())+"");
+
             final Intent intent = new Intent(context, AlarmReceiver.class);
             intent.putExtra(ALARM_EXTRA, alarm);
+
 
 
             AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             PendingIntent pi = PendingIntent.getBroadcast(context,AlarmUtils.getNotificationId(alarm), intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            Log.d("GK","A NORMAL ALARM CREATED");
+            Log.d("GK","A NORMAL ALARM CREATED.Alarm time "+alarm.getTime()+" Current time :"+System.currentTimeMillis());
             if(Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
                 am.set(AlarmManager.RTC_WAKEUP, alarm.getTime(), pi);
             } else {

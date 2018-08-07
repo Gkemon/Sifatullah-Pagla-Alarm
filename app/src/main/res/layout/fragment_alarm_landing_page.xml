@@ -8,18 +8,21 @@
 
     >
 
+        <RelativeLayout
+            android:layout_above="@+id/adlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
     <VideoView
         android:layout_above="@+id/button_layout"
         android:id="@+id/video_player"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="match_parent"
          />
 
     <LinearLayout
         android:id="@+id/button_layout"
         android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -42,16 +45,22 @@
             android:text="@string/dismiss"
             tools:text="@string/dismiss"
             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored" />
-        <LinearLayout
-            android:id="@+id/adlayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/primary_dark"
-            android:orientation="vertical">
-        </LinearLayout>
+
 
     </LinearLayout>
+        </RelativeLayout>
 
+    <LinearLayout
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/adlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary_dark"
+        android:orientation="vertical">
+
+
+    </LinearLayout>
     <!--<LinearLayout-->
         <!--android:id="@+id/adlayout"-->
         <!--android:layout_below="@id/button_layout"-->
