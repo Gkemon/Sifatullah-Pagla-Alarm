@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.binary.geek.shitatullahPaglaAlarm.R;
@@ -68,8 +69,7 @@ public final class MainFragment extends Fragment
 
 
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
+
 
 
         setPublisherID();
@@ -86,8 +86,6 @@ public final class MainFragment extends Fragment
 //                intentForOpenLandingPage.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //
 //                getContext().startActivity(intentForOpenLandingPage);
-
-
                 AlarmUtils.checkAlarmPermissions(getActivity());
                 final Intent i =
                         AddEditAlarmActivity.buildAddEditAlarmActivityIntent(
@@ -154,6 +152,9 @@ public final class MainFragment extends Fragment
 
 
     public void setPublisherID(){
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+
         databaseReference.child("admob flag").child("publisher id").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -169,16 +170,22 @@ public final class MainFragment extends Fragment
 
     }
     public void setBannerAD(final View v){
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+
         databaseReference.child("admob flag").child("banner").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.d("GK","DataSnapshot : banner id : "+dataSnapshot.getValue(String.class));
 
-                mAdView = (AdView) v.findViewById(R.id.adView);
-                mAdView.setVisibility(View.VISIBLE);
 
+                final AdView mAdView = new AdView(getActivity());
                 mAdView.setAdUnitId(dataSnapshot.getValue(String.class));
                 mAdView.setAdSize(AdSize.SMART_BANNER);
+
+                final LinearLayout adLinLay = (LinearLayout) v.findViewById(R.id.adlayout);
+                adLinLay.addView(mAdView);
+
 
                 AdRequest adRequest = new AdRequest.Builder()
                         .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)

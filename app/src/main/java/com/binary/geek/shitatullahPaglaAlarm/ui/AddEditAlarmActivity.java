@@ -7,10 +7,12 @@ import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.binary.geek.shitatullahPaglaAlarm.R;
 import com.binary.geek.shitatullahPaglaAlarm.data.DatabaseHelper;
 import com.binary.geek.shitatullahPaglaAlarm.model.Alarm;
+import com.binary.geek.shitatullahPaglaAlarm.service.AlarmReceiver;
 import com.binary.geek.shitatullahPaglaAlarm.service.LoadAlarmsService;
 
 import java.lang.annotation.Retention;
@@ -27,6 +29,7 @@ public final class AddEditAlarmActivity extends AppCompatActivity {
     public static final int EDIT_ALARM = 1;
     public static final int ADD_ALARM = 2;
     public static final int UNKNOWN = 0;
+    public Alarm alarm;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,7 +40,7 @@ public final class AddEditAlarmActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getToolbarTitle());
 
-        final Alarm alarm = getAlarm();
+         alarm = getAlarm();
 
         if(getSupportFragmentManager().findFragmentById(R.id.edit_alarm_frag_container) == null) {
             getSupportFragmentManager()
@@ -45,6 +48,45 @@ public final class AddEditAlarmActivity extends AppCompatActivity {
                     .add(R.id.edit_alarm_frag_container, AddEditAlarmFragment.newInstance(alarm))
                     .commit();
         }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        switch (getMode()) {
+            case EDIT_ALARM:
+
+                break;
+            case ADD_ALARM:
+
+                //Cancel any pending notifications for this alarm
+                AlarmReceiver.cancelReminderAlarm(AddEditAlarmActivity.this, alarm);
+
+                final int rowsDeleted = DatabaseHelper.getInstance(AddEditAlarmActivity.this).deleteAlarm(alarm);
+                int messageId;
+                if(rowsDeleted == 1) {
+                    messageId = R.string.delete_complete;
+                    Toast.makeText(AddEditAlarmActivity.this, messageId, Toast.LENGTH_SHORT).show();
+                    LoadAlarmsService.launchLoadAlarmsService(AddEditAlarmActivity.this);
+                    AddEditAlarmActivity.this.finish();
+                } else {
+                    messageId = R.string.delete_failed;
+                    Toast.makeText(AddEditAlarmActivity.this, messageId, Toast.LENGTH_SHORT).show();
+                }
+
+
+                break;
+            case UNKNOWN:
+            default:
+                throw new IllegalStateException("Mode supplied as intent extra for " +
+                        AddEditAlarmActivity.class.getSimpleName() + " must match value in " +
+                        Mode.class.getSimpleName());
+        }
+
+
+
 
     }
 

@@ -50,10 +50,10 @@ public final class AlarmReceiver extends BroadcastReceiver {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         builder.setSmallIcon(R.drawable.ic_alarm_white_24dp);
         builder.setColor(ContextCompat.getColor(context, R.color.accent));
-        builder.setContentTitle(context.getString(R.string.app_name));
+       // builder.setContentTitle(context.getString(R.string.app_name));
         builder.setContentText("অশিক্ষিত মূর্খ বর্বররা ঘুম থেকে উঠ জলদি");
         builder.setTicker(alarm.getLabel());
-        builder.setVibrate(new long[] {1000,500,1000,500,1000,500});
+        builder.setVibrate(new long[] {1000,500,1000,500,1000,500,1000,500,1000,500,1000,500});
         builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
         builder.setContentIntent(pIntent);
         builder.setAutoCancel(true);

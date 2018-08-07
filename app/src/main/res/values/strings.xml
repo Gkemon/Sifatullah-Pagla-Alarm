@@ -25,7 +25,7 @@
     <string name="action_delete">Delete</string>
 
     <!-- Alarm Landing Page Activity/Fragment -->
-    <string name="launch_main_activity">Launch Main Activity</string>
+    <string name="launch_main_activity">মেইন এপে যা</string>
     <string name="dismiss">থামা আমারে</string>
 
     <!-- Days -->

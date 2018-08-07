@@ -10,7 +10,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
-    android:layout_above="@+id/adView"
+    android:layout_above="@+id/adlayout"
     android:layout_width="match_parent"
     android:scrollbarStyle="outsideOverlay">
 
@@ -217,22 +217,19 @@
     </LinearLayout>
 
 </ScrollView>
-    <com.google.android.gms.ads.AdView
 
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView"
-        android:visibility="visible"
+
+    <LinearLayout
+        android:id="@+id/adlayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-
-        >
+        android:orientation="vertical">
+    </LinearLayout>
 
         <!-- getting error "The ad unit ID can only be set once on AdView." if i add it in xml-->
         <!--ads:adSize="SMART_BANNER"-->
         <!--ads:adUnitId="@string/banner_home_footer"-->
-
-    </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>

@@ -68,7 +68,7 @@ public final class Alarm implements Parcelable{
     }
 
     public Alarm(long id) {
-        this(id, System.currentTimeMillis());
+        this(id, System.currentTimeMillis()+(2*60*1000));
     }
 
     public Alarm(long id, long time, @Days int... days) {

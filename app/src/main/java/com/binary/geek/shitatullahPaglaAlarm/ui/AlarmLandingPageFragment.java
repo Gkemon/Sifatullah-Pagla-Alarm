@@ -1,6 +1,7 @@
 package com.binary.geek.shitatullahPaglaAlarm.ui;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -32,6 +33,13 @@ public final class AlarmLandingPageFragment extends Fragment implements View.OnC
         String path = "android.resource://" +"com.binary.geek.shitatullahPaglaAlarm" + "/" + R.raw.videoplayback;
         view.setVideoURI(Uri.parse(path));
         view.start();
+
+        view.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.setLooping(true);
+            }
+        });
 
 
         return v;
