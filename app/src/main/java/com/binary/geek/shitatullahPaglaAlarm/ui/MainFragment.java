@@ -202,17 +202,17 @@ public final class MainFragment extends Fragment
 
                     @Override
                     public void onAdClosed() {
-                        Toast.makeText(getContext(), "Ad is closed!", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getContext(), "Ad is closed!", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onAdFailedToLoad(int errorCode) {
-                        Toast.makeText(getContext(), "Ad failed to load! error code: " + errorCode, Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getContext(), "Ad failed to load! error code: " + errorCode, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onAdLeftApplication() {
-                        Toast.makeText(getContext(), "Ad left application!", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(getContext(), "Ad left application!", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

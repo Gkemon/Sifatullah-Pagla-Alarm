@@ -112,7 +112,24 @@ public final class AddEditAlarmFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.action_save:
                 //setfullScreenAD();
-                save();
+                if(!(mSat.isChecked()||mSun.isChecked()||mMon.isChecked()||mTues.isChecked()||mWed.isChecked()||mThurs.isChecked()||mFri.isChecked())){
+
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.DeleteAlarmDialogTheme);
+                    builder.setTitle(R.string.days_warn_title);
+                    builder.setMessage(R.string.days_warn_content);
+                    builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+
+                    builder.show();
+
+                }else{
+                    save();
+                }
+
                 break;
             case R.id.action_delete:
                 delete();
@@ -154,14 +171,9 @@ public final class AddEditAlarmFragment extends Fragment {
         time.set(Calendar.MINUTE, ViewUtils.getTimePickerMinute(mTimePicker));
         time.set(Calendar.HOUR_OF_DAY, ViewUtils.getTimePickerHour(mTimePicker));
 
-        //TODO work from here
-
-        Log.d("GK","Current min:"+ViewUtils.getTimePickerMinute(mTimePicker)+" ");
 
 
         alarm.setTime(time.getTimeInMillis());
-
-
 
         alarm.setLabel(mLabel.getText().toString());
 
@@ -172,6 +184,8 @@ public final class AddEditAlarmFragment extends Fragment {
         alarm.setDay(Alarm.FRI, mFri.isChecked());
         alarm.setDay(Alarm.SAT, mSat.isChecked());
         alarm.setDay(Alarm.SUN, mSun.isChecked());
+
+
 
         final int rowsUpdated = DatabaseHelper.getInstance(getActivity()).updateAlarm(alarm);
         final int messageId = (rowsUpdated == 1) ? R.string.update_complete : R.string.update_failed;
@@ -262,7 +276,7 @@ public final class AddEditAlarmFragment extends Fragment {
 
                     @Override
                     public void onAdLeftApplication() {
-                        Toast.makeText(getActivity(), "Ad left application!", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getActivity(), "Ad left application!", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -315,7 +329,7 @@ public final class AddEditAlarmFragment extends Fragment {
 
     public void setfullScreenAD(){
 
-        Toast.makeText(getActivity(),"Please wait for an ad",Toast.LENGTH_LONG).show();
+       // Toast.makeText(getActivity(),"Please wait for an ad",Toast.LENGTH_LONG).show();
 
         FirebaseDatabase.getInstance().getReference().child("admob flag").child("fullscreen").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

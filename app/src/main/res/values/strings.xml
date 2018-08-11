@@ -17,8 +17,11 @@
     <string name="delete_failed">Delete Failed</string>
     <string name="delete_dialog_title">Confirm Delete Alarm</string>
     <string name="delete_dialog_content">তুই কি আসলেই এলার্ম ডিলেট করতে চাস হালারপুত ?</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
+    <string name="days_warn_content">ঐ হারামজাদা চোর কোথাকার। তুই দিন সিলেক্ট না করলে আমি তোরে ডাকবো কখন?যেকোন একটা দিন সিলেক্ট কর</string>
+    <string name="days_warn_title">Select any day</string>
+
+    <string name="yes">আইচ্ছা</string>
+    <string name="no">না</string>
 
     <!-- Edit Alarm Menu -->
     <string name="action_save">Save</string>

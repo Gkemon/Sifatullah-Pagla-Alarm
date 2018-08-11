@@ -73,35 +73,36 @@ public final class AlarmReceiver extends BroadcastReceiver {
 
        // Check whether the alarm is set to run on any days
         if(!AlarmUtils.isAlarmActive(alarm)) {
-            Log.d("GK","ACTIVE");
+            //TODO task for normal alarm
+
+//            Log.d("GK","ACTIVE");
+//            if(System.currentTimeMillis()>alarm.getTime())
+//            alarm.setTime(System.currentTimeMillis()+(System.currentTimeMillis()-alarm.getTime()));
+//            else alarm.setTime(alarm.getTime()+(alarm.getTime()-System.currentTimeMillis()));
+//
+//            Log.d("GK","Next time :"+System.currentTimeMillis()+(System.currentTimeMillis()-alarm.getTime())+"");
+//
+//            final Intent intent = new Intent(context, AlarmReceiver.class);
+//            intent.putExtra(ALARM_EXTRA, alarm);
+//
+//
+//
+//            AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+//            PendingIntent pi = PendingIntent.getBroadcast(context,AlarmUtils.getNotificationId(alarm), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//            Log.d("GK","A NORMAL ALARM CREATED.Alarm time "+alarm.getTime()+" Current time :"+System.currentTimeMillis());
+//            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+//                am.set(AlarmManager.RTC_WAKEUP, alarm.getTime(), pi);
+//            } else {
+//                am.setExact(AlarmManager.RTC_WAKEUP, alarm.getTime(), pi);
+//            }
+
+            //TODO task for normal alarm
 
 
-            final Calendar time = Calendar.getInstance();
-
-            time.set(Calendar.SECOND,(int)(alarm.getTime()/1000);
-
-            alarm.setTime(System.currentTimeMillis()+(System.currentTimeMillis()-alarm.getTime()));
-
-            Log.d("GK","Next time :"+System.currentTimeMillis()+(System.currentTimeMillis()-alarm.getTime())+"");
-
-            final Intent intent = new Intent(context, AlarmReceiver.class);
-            intent.putExtra(ALARM_EXTRA, alarm);
-
-
-
-            AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            PendingIntent pi = PendingIntent.getBroadcast(context,AlarmUtils.getNotificationId(alarm), intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-            Log.d("GK","A NORMAL ALARM CREATED.Alarm time "+alarm.getTime()+" Current time :"+System.currentTimeMillis());
-            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-                am.set(AlarmManager.RTC_WAKEUP, alarm.getTime(), pi);
-            } else {
-                am.setExact(AlarmManager.RTC_WAKEUP, alarm.getTime(), pi);
-            }
 
             //If alarm not set to run on any days, cancel any existing notifications for this alarm
-           // cancelReminderAlarm(context, alarm);
-
+            cancelReminderAlarm(context, alarm);
             return;
         }
         else {
